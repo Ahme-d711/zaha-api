@@ -1,0 +1,62 @@
+{
+  "name": "server",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bcryptjs": "^3.0.0",
+    "@types/bun": "latest",
+    "@types/compression": "^1.8.1",
+    "@types/cookie-parser": "^1.4.10",
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/express-session": "^1.18.2",
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/morgan": "^1.9.10",
+    "@types/multer": "^2.0.0",
+    "@types/node": "^25.0.9",
+    "@types/swagger-jsdoc": "^6.0.4",
+    "@types/swagger-ui-express": "^4.1.8",
+    "nodemon": "^3.1.11",
+    "ts-node": "^10.9.2"
+  },
+  "peerDependencies": {
+    "typescript": "^5.9.3"
+  },
+  "scripts": {
+    "dev": "bun --watch index.ts",
+    "build": "npx tsc",
+    "start": "node dist/index.js",
+    "prod": "npm run build && npm start",
+    "seed:data": "bun scripts/seed-default-data.ts",
+    "seed:reset": "bun scripts/seed-default-data.ts --reset",
+    "pm2:start": "pm2 start ecosystem.config.js --env production",
+    "pm2:stop": "pm2 stop silver-glow-api",
+    "pm2:restart": "pm2 restart silver-glow-api",
+    "pm2:delete": "pm2 delete silver-glow-api",
+    "pm2:logs": "pm2 logs silver-glow-api",
+    "deploy": "npm run build && npm run pm2:restart"
+  },
+  "dependencies": {
+    "@google-cloud/translate": "^9.3.0",
+    "axios": "^1.13.5",
+    "bcryptjs": "^3.0.3",
+    "compression": "^1.8.1",
+    "connect-mongo": "^6.0.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "express-rate-limit": "^8.2.1",
+    "express-session": "^1.18.2",
+    "helmet": "^8.1.0",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^9.1.4",
+    "morgan": "^1.10.1",
+    "multer": "^2.0.2",
+    "resend": "^6.12.2",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^5.0.1",
+    "zod": "^4.3.5"
+  }
+}
