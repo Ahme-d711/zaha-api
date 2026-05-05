@@ -15,8 +15,26 @@ import { env } from "./config/env.js";
 import { swaggerSpec } from "./config/swagger.config.js";
 import { router as apiRouter } from "./routes/index.js";
 import { ensureServerReady } from "./bootstrap.js";
+import type { CorsOptions } from "cors";
 
 const app: Application = express();
+
+const corsOptions: CorsOptions = {
+  origin(origin, callback) {
+    if (!origin) {
+      callback(null, true);
+      return;
+    }
+    if (env.allowedFrontendOrigins.includes(origin)) {
+      callback(null, true);
+      return;
+    }
+    callback(null, false);
+  },
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
 
 app.use(async (req, res, next) => {
   try {
@@ -32,14 +50,7 @@ app.use(
     crossOriginResourcePolicy: { policy: "cross-origin" },
   })
 );
-app.use(
-  cors({
-    origin: env.frontendUrl || "https://zaha-app-k5za.vercel.app",
-    credentials: true,
-    methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
+app.use(cors(corsOptions));
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 app.use(cookieParser());
