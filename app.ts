@@ -34,7 +34,7 @@ app.use(
 );
 app.use(
   cors({
-    origin: env.frontendUrl || "http://localhost:3030",
+    origin: env.frontendUrl || "https://zaha-app-k5za.vercel.app",
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
