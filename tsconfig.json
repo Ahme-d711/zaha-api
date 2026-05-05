@@ -12,6 +12,6 @@
     "forceConsistentCasingInFileNames": true,
     "types": ["node"]
   },
-  "include": ["index.ts", "controllers", "services", "routes", "middlewares", "models", "utils", "config", "scripts", "migrations", "types"],
+  "include": ["index.ts", "app.ts", "bootstrap.ts", "controllers", "services", "routes", "middlewares", "models", "utils", "config", "scripts", "migrations", "types"],
   "exclude": ["node_modules", "dist"]
 }
